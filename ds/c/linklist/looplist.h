@@ -15,6 +15,7 @@ typedef struct node
 
 extern loopnode_t *create_empty_looplist();
 extern void insert_head_looplist(loopnode_t *head, datatype_t data);
+extern void insert_tail_looplist(loopnode_t *head, datatype_t data);
 extern void print_data_looplist(loopnode_t *head);
 extern int is_empty_looplist(loopnode_t *head);
 #endif

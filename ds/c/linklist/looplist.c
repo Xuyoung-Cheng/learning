@@ -31,6 +31,27 @@ void insert_head_looplist(loopnode_t *head, datatype_t data)
 	return;
 }
 
+void insert_tail_looplist(loopnode_t *head, datatype_t data)
+{
+	loopnode_t *temp = (loopnode_t *)malloc(sizeof(loopnode_t));
+	if (NULL == temp)
+	{
+		printf("malloc is fail\n");
+		return;
+	}
+
+	temp->data = data;
+	loopnode_t *p = head;
+	while(p->next != head)
+	{
+		p = p->next;
+	}
+	temp->next = p->next;
+	p->next = temp;
+
+	return;
+}
+
 void print_data_looplist(loopnode_t *head)
 {
 	loopnode_t *p = head;
