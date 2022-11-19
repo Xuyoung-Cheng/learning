@@ -18,5 +18,8 @@ typedef struct bitree
 }bitree_t;
 
 extern bitree_t *create_binary_tree(int n);
+extern void pre_order(bitree_t *root);
+extern void in_order(bitree_t *root);
+extern void post_order(bitree_t *root);
 
 #endif
