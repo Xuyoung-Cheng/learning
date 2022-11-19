@@ -16,6 +16,10 @@ int main(int argc, char const *argv[])
 	printf("post_order : ");
 	post_order(root);
 	printf("\n");
+	
+	printf("level_order : ");
+	level_order(root);
+	printf("\n");
 
     return 0;
 }
