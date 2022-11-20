@@ -34,6 +34,80 @@ int total_day(int y, int m, int d)
 	return sum;
 }
 
+// Kim larsen calculation formula
+int weekday(int y, int m, int d)
+{
+	int count = 0;
+
+	if (m == 1 || m == 2) {
+		m = m + 12;
+		y = y - 1;
+	}
+
+	count = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+
+	return count;
+}
+
+void display_week(int y, int m, int d)
+{
+	int count = 0;
+
+	count = weekday(y, m, d);
+
+	switch (count) {
+	case 0:
+		printf("%d-%d-%d is Sunday\n", y, m, d);
+		break;
+	case 1:
+		printf("%d-%d-%d is Monday\n", y, m, d);
+		break;
+	case 2:
+		printf("%d-%d-%d is Tuesday\n", y, m, d);
+		break;
+	case 3:
+		printf("%d-%d-%d is Wednesday\n", y, m, d);
+		break;
+	case 4:
+		printf("%d-%d-%d is Thursday\n", y, m, d);
+		break;
+	case 5:
+		printf("%d-%d-%d is Firday\n", y, m, d);
+		break;
+	case 6:
+		printf("%d-%d-%d is Saturday\n", y, m, d);
+		break;
+	}
+}
+
+void display_month(int y, int m, int d)
+{
+	int w = 0;;
+	int i = 0;
+	int max = 0;
+
+	w = weekday(y, m, 1);
+	max = max_day(y, m);
+
+	printf("\n\t\t%d year %d month\n", y, m);
+	printf("SUN  MON  TUE  WED  THU  FRI  SAT\n");
+
+	for (i = 0; i < w; i++) {
+		printf("     ");
+	}
+	
+	for (i = 1; i <= max; i++) {
+		if (i == d)
+			printf("\033[1;43m%-2d\033[0m   ", i);
+		else
+			printf("%-5d", i);
+		if ((w + i) % 7 == 0)
+			printf("\n");
+	}
+
+	printf("\n");
+}
+
 int main(int argc, char *argv[])
 {
 	int year = 0, month = 0, day = 0;
@@ -56,5 +130,8 @@ int main(int argc, char *argv[])
 	
 	ret = total_day(year, month, day);
 	printf("%d-%d-%d is %d day of the year\n", year, month, day, ret);
+
+	display_week(year, month, day);
+	display_month(year, month, day);
 	return 0;
 }
