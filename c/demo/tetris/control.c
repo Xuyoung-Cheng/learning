@@ -3,6 +3,15 @@
 #include <termios.h>
 #include <unistd.h>
 
+extern int n_num;
+extern int n_mode;
+extern int n_x;
+extern int n_y;
+extern int n_color;
+
+extern void eraser_shape(int n, int m, int a, int b);
+extern void print_mode_shape(int n, int m, int x, int y, int c);
+
 /* get a charater not echo */
 int getch()
 {
@@ -16,6 +25,36 @@ int getch()
     tcsetattr(0, 0, &tm_old);
     
     return ch;
+}
+
+void change_shape()
+{
+    int m = (n_mode + 1) % 4;
+
+    eraser_shape(n_num, n_mode, n_x, n_y);
+    n_mode = m;
+    print_mode_shape(n_num, n_mode, n_x, n_y, n_color);
+}
+
+void move_left(int n, int m)
+{
+    eraser_shape(n, m, n_x, n_y);
+    n_x -= 2;
+    print_mode_shape(n, m, n_x, n_y, n_color);
+}
+
+void move_right(int n, int m)
+{
+    eraser_shape(n, m, n_x, n_y);
+    n_x += 2;
+    print_mode_shape(n, m, n_x, n_y, n_color);
+}
+
+void move_down(int n, int m)
+{
+    eraser_shape(n, m, n_x, n_y);
+    n_y += 1;
+    print_mode_shape(n, m, n_x, n_y, n_color);
 }
 
 void key_control()
@@ -42,25 +81,19 @@ void key_control()
                 switch (ch)
                 {
                     case 'A':
-                        printf("up\n");
+                        change_shape();
                         break;
                     case 'B':
-                        printf("down\n");
+                        move_down(n_num, n_mode);
                         break;
                     case 'C':
-                        printf("right\n");
+                        move_right(n_num, n_mode);
                         break;
                     case 'D':
-                        printf("left\n");
+                        move_left(n_num, n_mode);
                         break;
                 }
             }
         }
     }
-}
-
-int main(int argc, char const *argv[])
-{
-    key_control();
-    return 0;
 }

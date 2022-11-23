@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int shape[7][4][18] =
     {
@@ -48,6 +49,10 @@ int shape[7][4][18] =
         },
 };
 
+int n_x = 6;
+int n_y = 6;
+int n_num, n_mode, n_color;
+
 /* Outputs a drawing at the specified location */
 void print_mode_shape(int n, int m, int x, int y, int c)
 {
@@ -72,4 +77,41 @@ void print_mode_shape(int n, int m, int x, int y, int c)
 
         xx += 2;
     }
+}
+
+void eraser_shape(int n, int m, int a, int b)
+{
+    int i = 0;
+    int xx = a;
+    int yy = b;
+
+
+    for (i = 0; i < 16; i++)
+    {
+        if (i != 0 && i % 4 == 0)
+        {
+            yy += 1;
+            xx = a;
+        }
+
+        if (shape[n][m][i] == 1)
+        {
+            printf("\033[%d;%dH  \033[0m", yy, xx);
+        }
+
+        xx += 2;
+    }
+
+    fflush(NULL);
+}
+
+void init_shape()
+{
+    srandom(time(NULL));
+
+    n_num = random() % 7;
+    n_mode = random() % 4;
+    n_color = random() % 7 + 40;
+
+    print_mode_shape(n_num, n_mode, n_x, n_y, n_color);
 }
