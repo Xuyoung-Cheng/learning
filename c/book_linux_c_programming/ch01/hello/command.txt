@@ -1,0 +1,7 @@
+gcc main.c
+./a.out
+
+gcc main.c -o main /* -o for output */
+./main
+
+gcc -Wall main.c -o main /* -Wall all warning messages are prompted */
