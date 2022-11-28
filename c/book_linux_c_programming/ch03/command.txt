@@ -1,0 +1,2 @@
+gcc math_demo.c -lm /* when you use math.h, you need this option, means
+libm.so */
