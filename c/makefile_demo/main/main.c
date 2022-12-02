@@ -3,6 +3,7 @@
 
 int main(void)
 {
+	fun();
 	print_value();
 	return 0;
 }
