@@ -1,17 +1,22 @@
-main_exec : user_global.o user_control.o user_print.o main.o
-	gcc user_global.o user_control.o user_print.o main.o
+CC := gcc
+INCLUDE_DIR := -I ../include
+OBJ_DIR := $(shell pwd)/obj
+BIN_DIR := $(shell pwd)/bin
 
-main.o : main.c
-	gcc -c main.c -o main.o
+SUB_DIR := main user global obj
 
-user_global.o : user_global.c
-	gcc -c user_global.c -o user_global.o
+TARGET := tetris
 
-user_control.o : user_control.c
-	gcc -c user_control.c -o user_control.o
+export CC INCLUDE_DIR OBJ_DIR BIN_DIR SUB_DIR TARGET
 
-user_print.o : user_print.c
-	gcc -c user_print.c -o user_print.o
+all : $(SUB_DIR)
+
+$(SUB_DIR) : MK_BIN
+	make -C $@
+
+MK_BIN : 
+	mkdir -p $(BIN_DIR)
 
 clean :
-	rm -rf *.o *.out
+	rm -rf $(BIN_DIR) $(OBJ_DIR)/*.o
+
