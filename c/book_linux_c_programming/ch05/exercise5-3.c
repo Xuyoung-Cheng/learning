@@ -10,7 +10,7 @@ int GCD(int a, int b)
 
 int main(void)
 {
-	int a = 1, b = -2;
+	int a = 8, b = 8;
 	printf("%d\n", GCD(a, b));
 	return 0;
 }
