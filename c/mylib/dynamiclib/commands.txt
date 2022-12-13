@@ -1,0 +1,5 @@
+gcc -c mymax.c -o mymax.o
+gcc -shared mymax.o -o libmymax.so
+
+export LD_LIBRARY_PATH=.
+gcc -I. -L. main.c -lmymax -o main

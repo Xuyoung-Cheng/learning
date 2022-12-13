@@ -1,0 +1,4 @@
+gcc -c mymax.c -o mymax.o
+ar -rs libmymax.a mymax.o
+
+gcc -I. -L. main.c -lmymax -o main
