@@ -6,8 +6,8 @@
 #include <stdlib.h>
 
 #define SZ_NAME  8
-#define SZ_COUNT 32
-#define SZ_ARG   2
+#define SZ_COUNT 2 
+#define SZ_ARG   32
 
 typedef struct command
 {

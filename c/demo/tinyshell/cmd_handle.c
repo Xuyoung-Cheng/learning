@@ -1,4 +1,5 @@
 #include "cmd_handle.h"
+#include "cmd_cp.h"
 
 #define DEBUG
 
@@ -43,12 +44,12 @@ int cmd_parse(char *cmd, cmd_t *pcmd)
 	printf("[DEBUG]: cmd name: < %s >\n", p_cmd_name);
 #endif
 	strcpy(pcmd->cmd_name, p_cmd_name);
-	
+
 	for (;;) {
 		p_cmd_arg = strtok(NULL, " ");
-	       if (p_cmd_arg == NULL)
-	       		break;
-		strcpy(pcmd->cmd_arg_list[index++], p_cmd_arg);	       
+		if (p_cmd_arg == NULL)
+			break;
+		strcpy(pcmd->cmd_arg_list[index++], p_cmd_arg);
 	}
 
 	pcmd->cmd_arg_count = index;
@@ -70,6 +71,7 @@ int cmd_dispatch(cmd_t *pcmd)
 #ifdef DEBUG 
 		printf("cp command handle\n");
 #endif
+		cmd_cp_execute(pcmd);
 	}
 }
 
